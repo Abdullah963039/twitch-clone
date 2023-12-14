@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stream": "ngrok http --domain=loyal-weasel-nearly.ngrok-free.app 3000"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.6",
@@ -20,6 +21,7 @@
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-dom": "^18",
+    "svix": "^1.15.0",
     "tailwind-merge": "^2.1.0",
     "tailwindcss-animate": "^1.0.7"
   },
