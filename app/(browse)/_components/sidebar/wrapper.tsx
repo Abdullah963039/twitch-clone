@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useIsClient } from "usehooks-ts";
 
 import { useSidebar } from "@/store/use-sidebar";
 import { cn } from "@/lib/utils";
@@ -13,15 +13,11 @@ interface WrapperProps {
 }
 
 export const Wrapper = ({ children }: WrapperProps) => {
-  const [mounted, setMounted] = useState(false);
+  const isClient = useIsClient();
   const { collapsed } = useSidebar((state) => state);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   // Responsable of server side rendering (SSR)
-  if (!mounted)
+  if (!isClient)
     return (
       <aside
         className={cn(
