@@ -15,7 +15,7 @@ export const getFollowedUsers = async () => {
 
     return followingUsers;
   } catch (error) {
-    throw new Error(`500 Internal Error ${error}`);
+    return [];
   }
 };
 
