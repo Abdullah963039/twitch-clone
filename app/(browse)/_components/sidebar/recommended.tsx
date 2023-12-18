@@ -11,7 +11,7 @@ interface RecommendedProps {
 }
 
 export const Recommended = ({ data }: RecommendedProps) => {
-  const { collapsed } = useSidebar((state) => state);
+  const { collapsed } = useSidebar();
 
   const showLabel = !collapsed && data.length > 0;
 

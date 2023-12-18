@@ -11,7 +11,7 @@ interface FollowingProps {
 }
 
 export const Following = ({ data }: FollowingProps) => {
-  const { collapsed } = useSidebar((state) => state);
+  const { collapsed } = useSidebar();
 
   if (!data.length) return null;
 

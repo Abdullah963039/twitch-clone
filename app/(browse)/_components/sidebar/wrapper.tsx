@@ -15,7 +15,7 @@ interface WrapperProps {
 
 export const Wrapper = ({ children }: WrapperProps) => {
   const isClient = useIsClient();
-  const { collapsed } = useSidebar((state) => state);
+  const { collapsed } = useSidebar();
 
   // Responsable of server side rendering (SSR)
   if (!isClient)
