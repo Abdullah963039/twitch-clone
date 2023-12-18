@@ -1,6 +1,7 @@
+import { User } from "@prisma/client";
+
 import { db } from "@/lib/database";
 import { getSelf } from "@/lib/auth-service";
-import { User } from "@prisma/client";
 
 export const getRecommended = async () => {
   let userId: string | null;
@@ -19,9 +20,14 @@ export const getRecommended = async () => {
       orderBy: { createdAt: "desc" },
       where: {
         AND: [
-          { NOT: { id: userId } }, // exclude logged user
+          {
+            NOT: { id: userId }, // exclude logged user
+          },
           {
             NOT: { followedBy: { some: { followerId: userId } } }, // exclude followed users
+          },
+          {
+            NOT: { blocking: { some: { blockedId: userId } } }, // exclude blocked users
           },
         ],
       },
