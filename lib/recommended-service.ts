@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { Stream, User } from "@prisma/client";
 
 import { db } from "@/lib/database";
 import { getSelf } from "@/lib/auth-service";
@@ -13,10 +13,11 @@ export const getRecommended = async () => {
     userId = null;
   }
 
-  let users: User[];
+  let users: (User & { stream: Stream | null })[];
 
   if (userId) {
     users = await db.user.findMany({
+      include: { stream: true },
       orderBy: { createdAt: "desc" },
       where: {
         AND: [
@@ -33,7 +34,10 @@ export const getRecommended = async () => {
       },
     });
   } else {
-    users = await db.user.findMany({ orderBy: { createdAt: "desc" } });
+    users = await db.user.findMany({
+      include: { stream: true },
+      orderBy: { createdAt: "desc" },
+    });
   }
 
   return users;
