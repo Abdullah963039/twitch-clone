@@ -10,7 +10,9 @@ export const getFollowedUsers = async () => {
         followerId: self.id,
         following: { blocking: { none: { blockedId: self.id } } },
       },
-      include: { following: { include: { stream: true } } },
+      include: {
+        following: { include: { stream: { select: { isLive: true } } } },
+      },
     });
 
     return followingUsers;

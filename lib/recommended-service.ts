@@ -13,11 +13,11 @@ export const getRecommended = async () => {
     userId = null;
   }
 
-  let users: (User & { stream: Stream | null })[];
+  let users: (User & { stream: { isLive: boolean } | null })[];
 
   if (userId) {
     users = await db.user.findMany({
-      include: { stream: true },
+      include: { stream: { select: { isLive: true } } },
       orderBy: { createdAt: "desc" },
       where: {
         AND: [
@@ -35,7 +35,7 @@ export const getRecommended = async () => {
     });
   } else {
     users = await db.user.findMany({
-      include: { stream: true },
+      include: { stream: { select: { isLive: true } } },
       orderBy: { createdAt: "desc" },
     });
   }

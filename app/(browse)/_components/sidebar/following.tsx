@@ -6,7 +6,9 @@ import { useSidebar } from "@/store/use-sidebar";
 
 import { UserItem, UserItemSkeleton } from "./user-item";
 
-type DataType = Follow & { following: User & { stream: Stream | null } };
+type DataType = Follow & {
+  following: User & { stream: { isLive: boolean } | null };
+};
 
 interface FollowingProps {
   data: DataType[];
