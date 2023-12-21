@@ -7,8 +7,8 @@ import { useViewerToken } from "@/hooks/use-viewer-token";
 import { useChatSidebar } from "@/store/use-chat-sidebar";
 import { cn } from "@/lib/utils";
 
-import { Video } from "./video";
-import { Chat } from "./chat";
+import { Video, VideoSkeleton } from "./video";
+import { Chat, ChatSkeleton } from "./chat";
 import { ChatToggle } from "./chat/chat-toggle";
 
 interface StraemPlayerProps {
@@ -25,7 +25,7 @@ export const StreamPlayer = ({
   const { token, identity, name } = useViewerToken(user.id);
   const { collapsed } = useChatSidebar();
 
-  if (!token || !name || !identity) return <div>Cannot watch the stream</div>;
+  if (!token || !name || !identity) return <StreamPlayerSkeleton />;
 
   return (
     <>
@@ -47,7 +47,7 @@ export const StreamPlayer = ({
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
-            viewName={name}
+            viewerName={name}
             hostIdentity={user.id}
             hostName={user.username}
             isFollowing={isFollowing}
@@ -60,3 +60,15 @@ export const StreamPlayer = ({
     </>
   );
 };
+
+export const StreamPlayerSkeleton = () => (
+  <div className="grid grid-cols-1 lg:gap-y-0 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-6 h-full">
+    <div className="space-y-2 col-span-1 lg:col-span-2 xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10">
+      <VideoSkeleton />
+      {/* HeaderSkeleton */}
+    </div>
+    <div className="col-span-1 bg-background">
+      <ChatSkeleton />
+    </div>
+  </div>
+);
