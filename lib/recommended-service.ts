@@ -1,4 +1,4 @@
-import { Stream, User } from "@prisma/client";
+import { User } from "@prisma/client";
 
 import { db } from "@/lib/database";
 import { getSelf } from "@/lib/auth-service";

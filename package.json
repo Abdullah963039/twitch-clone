@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "stream": "ngrok http --domain=loyal-weasel-nearly.ngrok-free.app 3000"
+    "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.27.6",
