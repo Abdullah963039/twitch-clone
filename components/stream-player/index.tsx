@@ -1,6 +1,5 @@
 "use client";
 
-import { Stream, User } from "@prisma/client";
 import { LiveKitRoom } from "@livekit/components-react";
 
 import { useViewerToken } from "@/hooks/use-viewer-token";
@@ -14,9 +13,27 @@ import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
 import { AboutCard } from "./about-card";
 
+type CustomStream = {
+  id: string;
+  name: string;
+  thumbnailUrl: string | null;
+  isLive: boolean;
+  isChatEnabled: boolean;
+  isChatDelayed: boolean;
+  isChatFollowersOnly: boolean;
+};
+type CustomUser = {
+  id: string;
+  username: string;
+  imageUrl: string;
+  stream: CustomStream | null;
+  bio: string | null;
+  _count: { followedBy: number };
+};
+
 interface StraemPlayerProps {
-  user: User & { stream: Stream | null; _count: { followedBy: number } };
-  stream: Stream;
+  user: CustomUser;
+  stream: CustomStream;
   isFollowing: boolean;
 }
 
