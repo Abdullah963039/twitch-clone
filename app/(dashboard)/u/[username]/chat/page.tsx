@@ -3,6 +3,8 @@ import { getStreamByUserId } from "@/lib/stream-service";
 
 import { ToggleCard } from "./_components/toggle-card";
 
+export const metadata = { title: "Chat settings" };
+
 const ChatPage = async () => {
   const self = await getSelf();
   const stream = await getStreamByUserId(self.id);

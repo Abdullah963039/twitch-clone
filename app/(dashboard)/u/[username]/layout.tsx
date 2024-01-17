@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { getSelfByUsername } from "@/lib/auth-service";
@@ -12,6 +13,13 @@ interface CreatorLayoutProps {
     username: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: {
+    template: "Dashboard - %s",
+    default: "Dashboard",
+  },
+};
 
 const CreatorLayout = async ({ children, params }: CreatorLayoutProps) => {
   const self = await getSelfByUsername(params.username);

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 
 import { isBlockedByUser } from "@/lib/block-service";
 import { isFollowingUser } from "@/lib/follow-service";
@@ -7,6 +8,20 @@ import { StreamPlayer } from "@/components/stream-player";
 
 interface UserPageProps {
   params: { username: string };
+}
+
+export async function generateMetadata({
+  params,
+}: UserPageProps): Promise<Metadata> {
+  const user = await getUserByUsername(params.username);
+
+  if (!user || !user.stream) return { title: "Not found!" };
+
+  const isBlocked = await isBlockedByUser(user.id);
+
+  if (isBlocked) return { title: "Not found!" };
+
+  return { title: user.username };
 }
 
 const UserPage = async ({ params }: UserPageProps) => {
